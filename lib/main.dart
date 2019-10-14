@@ -68,25 +68,29 @@ class LottoBoardState extends State<LottoBoard> {
     @override
     Widget build(BuildContext context) {
         return Column(
-            children: <Widget>[
+            children: <Widget>[                
                 Expanded(    
                   child: new ListView.builder(
                     itemCount: lottoNumbers.length,
                     itemBuilder: (BuildContext ctxt, int index) {
                       //return new Text(lottoNumbers);
-                      return lottoNumbers[index];
+                      //return lottoNumbers[index];
+                      return Column(
+                        children: <Widget>[
+                           lottoNumbers[index]
+                        ],
+                      );
                     }
                   )
                 ),
-                Column(
-                  
-                ),
-                Row(
+                Expanded(
+                  child: Row(
                     children: <Widget>[
                         makeButton('로또 번호 출력', addLottoNumber),
                         makeButton('초기화', resetLottoNumber)
                     ],
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,                    
+                  ),
                 ),
             ],
             mainAxisAlignment: MainAxisAlignment.center,
