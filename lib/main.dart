@@ -45,8 +45,8 @@ class LottoBoardState extends State<LottoBoard> {
     void addLottoNumber() {
       resetLottoNumber();
       while (true) {
-        var num = rng.nextInt((max - min +1) + min).toString();
-        if(nums.add(num)) {
+        var num = min + rng.nextInt(max - min);
+        if(nums.add(num.toString())) {
           if(nums.length == 6) {
             break;   
           }
@@ -68,19 +68,30 @@ class LottoBoardState extends State<LottoBoard> {
     @override
     Widget build(BuildContext context) {
         return Column(
-            children: <Widget>[                
-                Expanded(    
-                  child: new ListView.builder(
-                    itemCount: lottoNumbers.length,
-                    itemBuilder: (BuildContext ctxt, int index) {
-                      //return new Text(lottoNumbers);
-                      //return lottoNumbers[index];
+            children: <Widget>[    
+                Expanded(
+                  child: Center(                    
+                    child: new Text(
+                      "이번주 로또 번호는?",
+                      textAlign: TextAlign.center,
+                      //style: TextStyle( )
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: new GridView.count(
+                    primary: false,
+                    padding: const EdgeInsets.all(10),                                                     
+                    crossAxisCount: 6,
+                    mainAxisSpacing: 6,
+                    crossAxisSpacing: 6,
+                    children: List.generate(lottoNumbers.length, (index){
                       return Column(
                         children: <Widget>[
-                           lottoNumbers[index]
+                          lottoNumbers[index],
                         ],
                       );
-                    }
+                    }),
                   )
                 ),
                 Expanded(
@@ -93,7 +104,6 @@ class LottoBoardState extends State<LottoBoard> {
                   ),
                 ),
             ],
-            mainAxisAlignment: MainAxisAlignment.center,
         );
     }
     
